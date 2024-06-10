@@ -1,0 +1,128 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<!-- 
+Toolbar -->
+<mat-toolbar color="primary" class="app-header mat-elevation-z6">
+  <button mat-icon-button  class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="nav-tool-items">
+    <h3>Bursa Döner Sermaye </h3>
+  </span>
+  <span class="example-spacer"></span>
+  <div *ngIf="userService.isLogged">
+    <button mat-raised-button color="basic" [matMenuTriggerFor]="kasaMenu">Kasa İşlemleri</button>
+    <mat-menu #kasaMenu="matMenu">
+      <button mat-menu-item routerLink="kasa">
+        <mat-icon color="primary">assignment</mat-icon>
+        <span>Kasa ve Ödemesi Alınacaklar</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon color="primary">pageview</mat-icon>
+        <span>Kasada Kayıtlı Makbuzlar</span>
+      </button>
+
+    </mat-menu>
+  </div>
+  <div *ngIf="userService.isLogged">
+    <button mat-raised-button color="basic" [matMenuTriggerFor]="makbuzMenu">Makbuz İşlemleri</button>
+    <mat-menu #makbuzMenu="matMenu">
+      <button mat-menu-item routerLink="makbuz">
+        <mat-icon color="primary">edit</mat-icon>
+        <span>Makbuz Oluştur</span>
+      </button>
+      <button mat-menu-item routerLink="kmakbuz">
+        <mat-icon color="primary">receipt</mat-icon>
+        <span>Vezneye Gönderdiğim Makbuzlar</span>
+      </button>
+
+    </mat-menu>
+  </div>
+  <div *ngIf="userService.isLogged && userService.userData.kullaniciRol==='admin'">
+
+    <button mat-raised-button color="warn" [matMenuTriggerFor]="menu">Uygulama Tanımları</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="home">
+        <mat-icon color="warn">featured_play_list</mat-icon>
+        <span>Ürün/Hizmet Tanımları</span>
+      </button>
+      <button mat-menu-item routerLink="kullanici">
+        <mat-icon color="warn">account_circle</mat-icon>
+        <span>Kullanıcı Tanımları Tanımları</span>
+      </button>
+      <button mat-menu-item routerLink="bolgebirim">
+        <mat-icon color="warn">markunread_mailbox</mat-icon>
+        <span>Bölge/Birim Tanımları</span>
+      </button>
+      <button mat-menu-item routerLink="sayac">
+        <mat-icon color="warn">alarm</mat-icon>
+        <span>Makbuz Sayaç Tanımları</span>
+      </button>
+      <button mat-menu-item routerLink="firma">
+        <mat-icon color="warn">business</mat-icon>
+        <span>Firma Tanımları</span>
+      </button>
+
+    </mat-menu>
+
+  </div>
+  <div *ngIf="userService.isLogged && (userService.userData.kullaniciRol==='admin' || userService.userData.kullaniciRol==='veznedar' )">
+
+    <button mat-raised-button color="warn" [matMenuTriggerFor]="veznemenu">Veznedar İşlemleri</button>
+    <mat-menu #veznemenu="matMenu">
+      <button mat-menu-item routerLink="stokkabul">
+        <mat-icon color="warn">receipt</mat-icon>
+        <span>Stok Giriş Belgesi Tanımları</span>
+      </button>
+      <button mat-menu-item routerLink="urunstok">
+        <mat-icon color="warn">receipt</mat-icon>
+        <span>Bölgelerdeki Ürün Stokları</span>
+      </button>
+      <button mat-menu-item routerLink="">
+        <mat-icon color="warn">receipt</mat-icon>
+        <span>Onaylanmayı Bekleyen Belgeler</span>
+      </button>
+      <button mat-menu-item routerLink="">
+        <mat-icon color="warn">theaters</mat-icon>
+        <span>Bütün Belgeler</span>
+      </button>      
+
+    </mat-menu>
+
+  </div>
+  <div *ngIf="userService.isLogged">
+    <button mat-raised-button>{{userService.userData.kullaniciAdi}}</button>
+  </div>
+
+  <div *ngIf="userService.isLogged">
+    <button mat-raised-button (click)="userService.logOut()">Çıkış</button>
+  </div>
+
+</mat-toolbar>
+
+
+
+
+
+<div class="content" role="main">
+  <router-outlet></router-outlet>
+
+</div>
+
+
+
+<div>
+  <!-- <footer>
+    <mat-toolbar color="primary" class="app-footer mat-elevation-z18">
+
+    </mat-toolbar>
+  </footer> -->
+
+</div>

@@ -1,0 +1,57 @@
+<div>
+    <mat-card>
+      <span>
+        <button mat-raised-button color="primary" >
+          Oluşturduğum Belgeler
+          <mat-icon>playlist_add</mat-icon>
+        </button>
+      </span>   
+      <span class="example-spacer"></span>      
+       
+  
+    </mat-card>
+</div>
+<div>
+   
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <!-- Position Column -->
+            <ng-container matColumnDef="tcNoVergiNo" class="background-color:ivory;">
+              <th mat-header-cell *matHeaderCellDef>T.C. no / Vergi No</th>
+              <td mat-cell *matCellDef="let element">{{ element.tcnoVergiNo }}</td>
+            </ng-container> 
+            <ng-container matColumnDef="isletmeAdiAdSoyad" class="background-color:ivory;">
+              <th mat-header-cell *matHeaderCellDef>İşletme / Ad Soyad</th>
+              <td mat-cell *matCellDef="let element">{{ element.isletmeAdiAdSoyad }}</td>
+            </ng-container> 
+            <ng-container matColumnDef="makbuzTutari" class="background-color:ivory;">
+              <th mat-header-cell *matHeaderCellDef>Makbuz Tutarı</th>
+              <td mat-cell *matCellDef="let element">{{ element.makbuzTutari }} TL</td>
+            </ng-container>
+            <ng-container matColumnDef="urunler">
+              <th mat-header-cell *matHeaderCellDef>Ürünler</th>
+              <td mat-cell *matCellDef="let el"><p *ngFor="let e of el.urunler">{{e.urun.urunAdi}} x {{e.adet}} adet</p></td>
+            </ng-container>   
+            <ng-container matColumnDef="makbuzDegistiren" class="background-color:ivory;">
+              <th mat-header-cell *matHeaderCellDef>Son İşlem Yapan</th>
+              <td mat-cell *matCellDef="let element">{{ element.makbuzDegistiren }}</td>
+            </ng-container>            
+            <ng-container matColumnDef="makbuzAsamasi" class="background-color:ivory;">
+              <th mat-header-cell *matHeaderCellDef>Makbuz Aşaması</th>
+              <td mat-cell *matCellDef="let element">{{ element.makbuzAsamasi }}</td>
+            </ng-container>  
+            <ng-container matColumnDef="islem">
+              <th mat-header-cell *matHeaderCellDef>İşlem</th>
+              <td mat-cell *matCellDef="let element">
+               
+                <button *ngIf="element.makbuzAsamasi==='Makbuz Oluşturuldu'" mat-raised-button color="warn" (click)="makbuzSil(element)">
+                  <mat-icon>delete</mat-icon> Sil
+                </button>       
+              </td>
+            </ng-container>
+          
+            <tr class="table-th" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="example-detail-row" *matRowDef="let row; columns: displayedColumns"></tr>               
+          </table>
+
+    
+</div>

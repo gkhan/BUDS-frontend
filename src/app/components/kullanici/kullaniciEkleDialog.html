@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Kullanıcı Ekle</h1>
+<div mat-dialog-content style="overflow: clip">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Kullanıcı Adı</mat-label>
+        <input matInput class="form-group" formControlName="kullaniciAdi">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput class="form-group" formControlName="email">
+      </mat-form-field>    
+      <mat-form-field appearance="outline">
+        <mat-label>Kullanıcı Bölgesi </mat-label>
+        <mat-select [(value)]="sayacAdi" >         
+          <mat-option *ngFor="let bolge of bolgeListesi" [value]="bolge.kasaBolgeAdi" >
+              <span> {{bolge.kasaBolgeAdi}}</span>
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-select [(value)]="kullaniciRol" (selectionChange)="kullaniciRolSec()">
+          <mat-option *ngFor="let rol of kullaniciRolleri" [value]="rol" >
+              <span> {{rol}}</span>
+            </mat-option>
+          </mat-select>
+      </mat-form-field>      
+      <div mat-dialog-actions>
+        <button mat-raised-button type="submit"  color="warn">Ekle</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+.demo-table {
+  width: 100%;
+  font-family: monospace;
+  border: 1px solid;
+  border-color: burlywood;
+}
+
+.table-th {
+  background-color: aliceblue;
+}
+
+.mat-header-cell {
+  font-size: medium;
+
+
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid silver;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+  font-size: medium;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: lavender;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-card {
+  display: flex;
+}
+
+.mat-dialog-content {
+  overflow: clip;
+}
+
+tr.mat-row {
+  height: 38px;
+
+}
+tr:nth-child(even) {background-color: #f2f2f2da;}
+
+button {
+  margin-right: 4px;
+  font-family: monospace;
+}

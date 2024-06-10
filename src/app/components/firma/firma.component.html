@@ -1,0 +1,61 @@
+<div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>   
+        <mat-form-field appearance="outline">
+            <mat-label>TC/Vergi No</mat-label>
+            <input matInput class="form-group" formControlName="tcNoVergiNo">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Ad Soyad/Firma Adı</mat-label>
+            <input matInput class="form-group" formControlName="adSoyadFirmaAd">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Adres</mat-label>
+            <input matInput class="form-group" formControlName="adres">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Firma Aktif Mi?</mat-label>
+            <mat-select formControlName="firmaAktifMi" (selectionChange)="firmaAktifMi()" >               
+                <mat-option  [value]=true >
+                    <span>Aktif</span>
+                  </mat-option>
+                  <mat-option  [value]=false >
+                    <span>Pasif</span>
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+    <span class="example-spacer"></span>
+
+    <div mat-dialog-actions>
+        <button class="form-group" mat-raised-button type="submit"   color="warn">Kaydet</button>
+    </div>
+    </mat-card>
+    </form>
+  </div>
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="tcNoVergiNo" class="background-color:ivory;">
+        <th mat-header-cell *matHeaderCellDef>TC/Vergi No</th>
+        <td mat-cell *matCellDef="let element">{{ element.tcNoVergiNo }}</td>
+      </ng-container> 
+      <ng-container matColumnDef="adSoyadFirmaAd">
+        <th mat-header-cell *matHeaderCellDef>Ad Soyad/Firma Adı</th>
+        <td mat-cell *matCellDef="let element">{{ element.adSoyadFirmaAd }}</td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="adres" class="background-color:ivory;">
+        <th mat-header-cell *matHeaderCellDef>Adres</th>
+        <td mat-cell *matCellDef="let element">{{ element.adres }}</td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="firmaAktifMi" class="background-color:ivory;">
+        <th mat-header-cell *matHeaderCellDef>Firma Aktif Mi?</th>
+        <td mat-cell *matCellDef="let element">{{ element.firmaAktifMi ? "Evet":"Hayır"}}</td>
+      </ng-container> 
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-th"></tr>
+      <tr mat-row class="example-detail-row" *matRowDef="let row; columns: displayedColumns"></tr>
+         
+    </table>
+  </div>

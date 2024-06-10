@@ -1,0 +1,57 @@
+<div>
+  <mat-card>
+    <span>
+      <div>
+        <button mat-flat-button style="font-size: large;" color="primary">
+          <mat-icon>assignment</mat-icon>
+          Bölgelerdeki stok durumları
+        </button>
+      </div>
+
+    </span>
+
+  </mat-card>
+</div>
+<div *ngIf="this.loading">
+  <mat-spinner style="margin: auto;"></mat-spinner>
+</div>
+<div *ngIf="!this.loading">
+  <mat-card>
+    <table mat-table #matMakbuz [dataSource]="dataSource1" class="demo-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="stokBolge">
+        <th mat-header-cell *matHeaderCellDef>Ürünün Bulunduğu Bölge</th>
+        <td mat-cell *matCellDef="let el">{{el.stokBolge}}</td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="urunAdi">
+        <th mat-header-cell *matHeaderCellDef>Ürün Adı</th>
+        <td mat-cell *matCellDef="let el">{{el.urunAdi}}</td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="stok">
+        <th mat-header-cell *matHeaderCellDef>Stok</th>
+        <td mat-cell *matCellDef="let el"><button mat-flat-button color="primary" >{{el.stok}}
+        </button></td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="guncellenmeTarihi">
+        <th mat-header-cell *matHeaderCellDef>Güncellenme Tarihi</th>
+        <td mat-cell *matCellDef="let el">{{el.guncellenmeTarihi| date:'d/M/yy, h:mm a'}}</td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="islem">
+        <th mat-header-cell *matHeaderCellDef>İşlem</th>
+        <td mat-cell *matCellDef="let el">
+          <button mat-icon-button color="primary">
+            <mat-icon>assignment</mat-icon>
+          </button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <tr class="table-th" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row class="example-detail-row" *matRowDef="let row; columns: displayedColumns;"></tr>
+      <!-- Row shown when there is no matching data. -->
+    </table>
+  </mat-card>
+</div>

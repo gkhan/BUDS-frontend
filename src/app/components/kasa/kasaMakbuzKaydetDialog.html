@@ -1,0 +1,184 @@
+<h1 mat-dialog-title>Makbuz Kaydet</h1>
+<div *ngIf="this.loading">
+  <mat-spinner style="margin: auto;"></mat-spinner>
+</div>
+<div *ngIf="!this.loading" mat-dialog-content style="overflow: clip">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Kaydedilecek Sayaç Numarası</mat-label>
+            <input matInput class="form-group" disabled value="{{this.sayac.sayacAraligiSeriNo}} - {{this.sayac.sayacDegeri}}">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Evrak Kayıt Numarası</mat-label>
+            <input matInput class="form-group" disabled value={{this.data.evrakKayitNumarasi}}>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Ödeme Şekli</mat-label>
+            <input matInput class="form-group" disabled value={{this.data.odemeSekli}}>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Tüzel Kişi Adı / Firma Adı</mat-label>
+            <input matInput class="form-group" disabled value={{this.data.isletmeAdiAdSoyad}}>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>TC/Vergi No</mat-label>
+            <input matInput class="form-group" disabled value={{this.data.tcnoVergiNo}}>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Adres</mat-label>
+            <input matInput class="form-group" disabled value={{this.data.isletmeAdres}}>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Makbuz Tutarı</mat-label>
+            <input matInput class="form-group" disabled value="{{this.data.makbuzTutari}} TL">
+        </mat-form-field>
+        <table mat-table #matMakbuz [dataSource]="this.data.urunler" class="mat-elevation-z8 dialog-table">
+            <!-- Position Column -->
+            <ng-container matColumnDef="urunAdi">
+              <th mat-header-cell *matHeaderCellDef>Ürün Adı</th>
+              <td mat-cell *matCellDef="let el">{{el.urun.urunAdi}}</td>
+              <td mat-footer-cell *matFooterCellDef>Makbuz Toplam</td>
+            </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="urunAdet">
+              <th mat-header-cell *matHeaderCellDef>Adet</th>
+              <td mat-cell *matCellDef="let el">{{el.adet}}</td>
+              <td mat-footer-cell *matFooterCellDef></td>
+          
+            </ng-container>
+            <ng-container matColumnDef="tutar">
+              <th mat-header-cell *matHeaderCellDef>Tutar</th>
+              <td mat-cell *matCellDef="let el">{{el.adet * el.urun.urunFiyat}} TL</td>
+              <td mat-footer-cell *matFooterCellDef>{{this.data.makbuzTutari}} TL</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="islem">
+              <th mat-header-cell *matHeaderCellDef>İşlem</th>
+              <td mat-cell *matCellDef="let el">
+                <mat-icon color="primary">done</mat-icon>                
+              </td>
+              <td mat-footer-cell *matFooterCellDef></td>
+          
+            </ng-container>         
+          
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+            <tr mat-row class="example-detail-row" *matRowDef="let row; columns: displayedColumns3;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns3"></tr>
+            <!-- Row shown when there is no matching data. -->
+          
+          </table>     
+        
+        
+        <div mat-dialog-actions>
+        <button class="form-group" mat-raised-button type="submit"   color="primary">Makbuz Kaydet</button>
+        <button class="form-group" mat-raised-button (click)="onNoClick()"  color="warn">İptal</button>
+        <button class="form-group" mat-raised-button (click)="makbuzPDF()"  color="primary">Makbuz Kaydet</button>
+
+
+      </div>
+    </form>
+  </div>
+  <div #mkbzHTML id="mkbzHTML" style="font-family: 'Newtime';font-size: small;width:630px ;margin: 20px;display: none;">
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+            <th ></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BURSA IL TARIM VE ORMAN MÜDÜRLÜĞÜ</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Döner Sermaye İşletmesi</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>OSMANGAZİ/8150016925</td>
+        <td></td>
+        <td></td>
+      </tr>      
+    </tbody>
+    </table>
+    <table style="width: 100%;margin-bottom: 20px;">
+      <thead>
+        <th style="width: 20%; align-items: center;"></th>
+        <th style="width: 50%;align-items: center;"></th>
+        <th style="width: 30%;align-items: center;"></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td style="height: 50px;">{{this.data.isletmeAdiAdSoyad}}</td>
+          <td>{{this.data.makbuzTarihi | date:'d/M/yyyy'}}</td>
+        </tr>
+        <tr>      
+          <td></td>
+          <td>{{this.data.tcnoVergiNo}}</td>
+          <td>{{this.data.makbuzTarihi | date:'H:mm'}}</td>
+        </tr>
+        <tr>      
+          <td></td>
+          <td></td>
+          <td> Evrak Sayı {{this.data.evrakKayitNumarasi}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="width: 100%;font-size:x-small;margin-bottom: 20px;">
+      <thead>
+        <tr>
+            <th style="width: 80%;"></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of this.data.urunler">
+        <td>{{e.urun.urunAdi}} x {{e.adet}}</td>
+        <td>{{e.urun.urunFiyat*e.adet-e.urun.urunFiyat*e.adet*e.urun.kdvOrani/100}} + {{e.urun.urunFiyat*e.adet*e.urun.kdvOrani/100}} </td>
+      </tr>
+      <tr *ngFor="let number of this.numbers" style="height: 20px;">
+        <td></td>
+        <td></td>
+      </tr>
+    
+     
+    </tbody>
+    </table>
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+            <th style="width: 35%;"></th>
+            <th style="width: 35%;"></th>
+            <th style="width: 35%;"></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>{{this.yaziyla}}lira{{this.ondalik}}</td>
+        <td></td>
+        <td>KDV Dahil:{{this.data.makbuzTutari}} TL</td>
+      </tr>
+      <tr>
+        <td>{{this.data.makbuzKaydeden}}</td>
+        <td></td>
+        <td>{{this.data.makbuzOdemeAlan}}</td>
+      </tr>
+     
+    </tbody>
+    </table>
+  
+  </div>
+</div>
+

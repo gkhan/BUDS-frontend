@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Stok-Kabul Belgesi Oluştur</h1>
+<div *ngIf="this.loading">
+  <mat-spinner style="margin: auto;"></mat-spinner>
+</div>
+<div *ngIf="!this.loading"  mat-dialog-content style="overflow: clip">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" style="width: 200px">
+        <mat-label>Ürün Kabul Bölgesi</mat-label>
+        <mat-select [(value)]="bolgeAdi">
+          <mat-option *ngFor="let bolge of bolgeListesi" [value]="bolge.kasaBolgeAdi">
+            <span> {{bolge.kasaBolgeAdi}}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline" style="width: 30%;">
+        <mat-label>Ürün Adı</mat-label>
+        <input matInput aria-label="Urun" [matAutocomplete]="auto" formControlName="urun">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let urun of filteredUruns" [value]="urun.urunAdi" (onSelectionChange)="urunSec(urun)">
+            <span> {{urun.urunAdi}} | </span>
+            <span> {{urun.urunKodu}} | </span>
+            <small>Fiyatı: {{urun.urunFiyat}} TL </small>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline" style="width: 30%;">
+        <mat-label>Ürün Kodu</mat-label>
+        <input matInput aria-label="UrunKodu" [matAutocomplete]="auto1" formControlName="urunKodu">
+        <mat-autocomplete #auto1="matAutocomplete">
+          <mat-option *ngFor="let urun of filteredUruns" [value]="urun.urunKodu" (onSelectionChange)="urunSec(urun)">
+            <span> {{urun.urunKodu}} | </span>
+            <span> {{urun.urunAdi}} | </span>
+            <small>Fiyatı: {{urun.urunFiyat}} TL </small>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>adet</mat-label>
+        <input matInput class="form-group" formControlName="adet">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Seri No:</mat-label>
+        <input matInput class="form-group" formControlName="seriNo">
+      </mat-form-field>
+      <div mat-dialog-actions>
+        <button class="form-group" mat-raised-button type="submit" color="warn">Stok-Kabul Belgesi Oluştur</button>
+      </div>
+    </form>
+  </div>
+</div>

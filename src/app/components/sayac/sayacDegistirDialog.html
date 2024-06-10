@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Sayaç Değiştir</h1>
+<div mat-dialog-content style="overflow: clip">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" style="width: 200px">
+        <mat-label>Sayaç Bölgesi :</mat-label>
+    <mat-select [(value)]="sayacAdi" (selectionChange)="sayacAdiSec()">
+        <mat-option *ngFor="let bolge of bolgeListesi" [value]="bolge.kasaBolgeAdi" >
+            <span> {{bolge.kasaBolgeAdi}}</span>
+          </mat-option>
+    </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Makbuz Seri No Başlangıcı</mat-label>
+        <input matInput class="form-group" formControlName="sayacAraligiSeriNo">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sayaç Başlama Makbuz Numarası</mat-label>
+        <input matInput class="form-group" formControlName="sayacAraligiBaslangic">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sayaç Bitiş Makbuz Numarası</mat-label>
+        <input matInput class="form-group" type="number" formControlName="sayacAraligiBitis">
+      </mat-form-field>      
+      <div mat-dialog-actions>
+        <button class="form-group" mat-raised-button type="submit"   color="warn">Sayaç Değiştir</button>
+      </div>
+    </form>
+  </div>
+</div>

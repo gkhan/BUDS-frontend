@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Kullanıcı Ekle/Değiştir</h1>
+<div mat-dialog-content style="overflow: clip">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Kullanıcı Adı</mat-label>
+        <input matInput class="form-group" formControlName="kullaniciAdi">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Kullanıcı Bölge</mat-label>
+        <input matInput class="form-group" formControlName="kullaniciBolge">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Kullanıcı Rol</mat-label>
+        <input matInput class="form-group" type="number" formControlName="kullaniciRol">
+      </mat-form-field>      
+      <div mat-dialog-actions>
+        <button mat-raised-button type="submit"  color="warn">Ekle/Değiştir</button>
+      </div>
+    </form>
+  </div>
+</div>

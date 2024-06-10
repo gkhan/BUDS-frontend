@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Bölge/Birim Değiştir</h1>
+<div mat-dialog-content style="overflow: clip">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Bölge/Birim Adı</mat-label>
+        <input matInput class="form-group" formControlName="kasaBolgeAdi">
+      </mat-form-field>      
+      <div mat-dialog-actions>
+        <button class="form-group" mat-raised-button type="submit"   color="warn">Değiştir</button>
+      </div>
+    </form>
+  </div>
+</div>

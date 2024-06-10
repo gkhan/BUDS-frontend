@@ -1,0 +1,30 @@
+.demo-table {
+    width: 100%;
+    overflow: auto;
+    font-size: small;
+  }
+  .dialog-table {
+    width:100%;
+  }
+  
+  .mat-row:hover  {
+    border-color: currentColor;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-card{
+      display: flex;
+  }
+  .mat-dialog-content{
+      overflow: clip;
+  }
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }

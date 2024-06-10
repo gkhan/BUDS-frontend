@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Ürün Ekle</h1>
+<div mat-dialog-content style="overflow: clip">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Ürün Kodu</mat-label>
+        <input matInput class="form-group" formControlName="urunKodu">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ürün Adı</mat-label>
+        <input matInput class="form-group" formControlName="urunAdi">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ürün/Hizmet Fiyatı</mat-label>
+        <input matInput class="form-group" type="number" formControlName="urunFiyat">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ürün/Hizmet Seçimi</mat-label>
+        <mat-select class="form-group" formControlName="stokGerekliMi">
+          <mat-option [value]=false >
+            Hizmet
+          </mat-option>
+          <mat-option [value]=true> 
+            Ürün
+          </mat-option>
+        </mat-select>       
+      </mat-form-field>
+      <mat-form-field appearance ="outline">
+        <mat-label>KDV Orani Seçimi</mat-label>
+        <mat-select class="form-group" formControlName="kdvOrani">
+          <mat-option value=8>
+            %8
+          </mat-option>
+          <mat-option value=10>
+            %10
+          </mat-option>
+          <mat-option value=18>
+            %18
+          </mat-option>
+          <mat-option value=20>
+            %20
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div mat-dialog-actions>
+        <button class="form-group" mat-raised-button type="submit"   color="warn">Ekle</button>
+
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div *ngIf="!loading">
+
+  <mat-card>
+    <span class="nav-tool-items">
+      <mat-card style="
+      background-color: aliceblue;
+  ">
+        <h2 >
+          Sayac Seri No: {{makbuzSayac.sayacAraligiSeriNo}} [{{makbuzSayac.sayacAraligiBaslangic}}]-[{{makbuzSayac.sayacAraligiBitis}}]</h2>
+      </mat-card>      
+    </span>
+    <span class="example-spacer"></span>
+      <span>
+        <mat-card style="
+        background-color: aliceblue;
+    ">
+          <h2 style="font-family: 'Digital';font-size: xx-large;">Kasa  {{kasaToplam}} TL</h2>
+        </mat-card>      
+      </span>
+      <span class="example-spacer"></span>
+      <span>
+        <button mat-raised-button color="basic" style="width: 100%;height: 100%; background-color: aliceblue;">Kasayı Kapat
+          <mat-icon color="basic">flight_takeoff</mat-icon>
+        </button>
+      </span>
+      <span>
+        <mat-card style="
+        background-color: aliceblue;
+    ">
+            <h2 style="text-align: center;font-size: large;">{{userService.userData.kullaniciBolge}} 
+              <mat-icon color="basic">supervisor_account</mat-icon></h2>
+        </mat-card>        
+      </span>
+      <span>
+        <mat-card style="
+        background-color: aliceblue;
+    ">
+            <h2 style="text-align: center;font-size: large;">{{userService.userData.kullaniciBolge}} 
+              <mat-icon color="basic">location_on</mat-icon></h2>
+        </mat-card>        
+      </span>
+  </mat-card>
+</div>
+
+<div *ngIf="loading">
+  <mat-card style="
+      background-color: aliceblue;
+  ">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+      </mat-card>    
+</div>
+
+<div>
+  <mat-card>
+      <table mat-table #matMakbuz  [dataSource]="dataSource1" class="demo-table">
+
+        <!-- Position Column -->
+<ng-container matColumnDef="evrakKayitNumarasi">
+  <th mat-header-cell *matHeaderCellDef>Evrak Kayıt No</th>
+  <td mat-cell *matCellDef="let el" (click)="openDialog(el)">{{el.evrakKayitNumarasi}}</td>
+</ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="tcnoVergiNo">
+          <th mat-header-cell *matHeaderCellDef>T.C. no / Vergi No</th>
+          <td mat-cell *matCellDef="let el" (click)="openDialog(el)">{{el.tcnoVergiNo}}</td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="isletmeAdiAdSoyad">
+          <th mat-header-cell *matHeaderCellDef>İşletme / Ad Soyad</th>
+          <td mat-cell *matCellDef="let el" (click)="openDialog(el)">{{el.isletmeAdiAdSoyad}}</td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="makbuzTutari">
+          <th mat-header-cell *matHeaderCellDef>Makbuz Tutarı</th>
+          <td mat-cell *matCellDef="let el" (click)="openDialog(el)">{{el.makbuzTutari}} TL</td>
+        </ng-container>
+        <ng-container matColumnDef="urunler">
+          <th mat-header-cell *matHeaderCellDef>Ürünler</th>
+          <td mat-cell *matCellDef="let el" (click)="openDialog(el)"><p *ngFor="let e of el.urunler">{{e.urun.urunAdi}} x {{e.adet}} adet</p></td>
+        </ng-container>       
+        <!-- Position Column -->
+        <ng-container matColumnDef="makbuzTarihi">
+          <th mat-header-cell *matHeaderCellDef>Makbuz Oluşturulma Tarihi</th>
+          <td mat-cell *matCellDef="let el"(click)="openDialog(el)">{{el.makbuzTarihi| date:'d/M/yy, h:mm a'}}</td>
+        </ng-container>
+         <!-- Position Column -->
+         <ng-container matColumnDef="makbuzKaydeden">
+          <th mat-header-cell *matHeaderCellDef>Makbuz Kaydeden</th>
+          <td mat-cell *matCellDef="let el" (click)="openDialog(el)">{{el.makbuzKaydeden}}</td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="islem">
+          <th mat-header-cell *matHeaderCellDef>İşlem</th>
+          <td mat-cell *matCellDef="let el">
+            <button mat-icon-button color="primary" (click)="openDialog(el)">
+              <mat-icon>save</mat-icon>
+            </button>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+  
+        </ng-container>
+  
+  
+  
+        <tr class="table-th" mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row class="example-detail-row" *matRowDef="let row; columns: displayedColumns2;"></tr>
+        <!-- Row shown when there is no matching data. -->
+  
+      </table>
+  </mat-card>
+</div>

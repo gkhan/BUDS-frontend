@@ -1,0 +1,86 @@
+<div>
+    <mat-card>
+      <span>
+        <button mat-raised-button color="primary" (click)="openDialog()">
+          Makbuz Sayacı Ekle
+          <mat-icon>playlist_add</mat-icon>
+        </button>
+      </span>   
+      <span class="example-spacer"></span>      
+      <mat-form-field appearance="outline">
+        <mat-label>İstenilen Bölgeyi Seçiniz</mat-label>
+      <mat-select [(value)]="sayacAdi" (selectionChange)="sayacAdiSec()">        
+        <mat-option value="hepsi">
+          <span>Bölgelerin Bütün Sayaçları</span>
+        </mat-option>
+        <mat-option *ngFor="let bolge of bolgeListesi" [value]="bolge.kasaBolgeAdi" >
+            <span> {{bolge.kasaBolgeAdi}}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      
+  
+    </mat-card>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="sayacAdi" class="background-color:ivory;">
+      <th mat-header-cell *matHeaderCellDef>Sayaç Adı</th>
+      <td mat-cell *matCellDef="let element">{{ element.sayacAdi }}</td>
+    </ng-container> 
+    <ng-container matColumnDef="sayacAraligiSeriNo" class="background-color:ivory;">
+      <th mat-header-cell *matHeaderCellDef>Makbuz Seri Numarası</th>
+      <td mat-cell *matCellDef="let element">{{ element.sayacAraligiSeriNo }}</td>
+    </ng-container> 
+    <ng-container matColumnDef="sayacAraligiBaslangic" class="background-color:ivory;">
+      <th mat-header-cell *matHeaderCellDef>Sayaç Başlangıcı</th>
+      <td mat-cell *matCellDef="let element">{{ element.sayacAraligiBaslangic }}</td>
+    </ng-container> 
+    <ng-container matColumnDef="sayacAraligiBitis" class="background-color:ivory;">
+      <th mat-header-cell *matHeaderCellDef>Sayaç Bitişi</th>
+      <td mat-cell *matCellDef="let element">{{ element.sayacAraligiBitis }}</td>
+    </ng-container>
+    <ng-container matColumnDef="sayacDegeri" class="background-color:ivory;">
+      <th mat-header-cell *matHeaderCellDef>Sayaç Değeri</th>
+      <td mat-cell *matCellDef="let element">{{ element.sayacDegeri }}</td>
+    </ng-container>
+    <ng-container matColumnDef="sayacGuncellemeTarihi" class="background-color:ivory;">
+      <th mat-header-cell *matHeaderCellDef>Güncelleme Tarihi</th>
+      <td mat-cell *matCellDef="let element">{{ element.sayacGuncellemeTarihi  | date : "dd/MM/yyy" }}</td>
+    </ng-container> 
+    
+    <ng-container matColumnDef="islem">
+      <th mat-header-cell *matHeaderCellDef>İşlem</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="basic" (click)="editDialog(element)">
+          <mat-icon>edit</mat-icon>Düzenle
+        </button>
+        
+        <button *ngIf="element.sayacAktifMi" mat-raised-button color="primary" (click)="sayacPasiflestir(element)">
+          <mat-icon>done_all</mat-icon>Aktif
+        </button>
+      
+    
+      <button *ngIf="!element.sayacAktifMi" mat-raised-button #aktifDegilse color="warn" (click)="sayacAktiflestir(element)">
+        <mat-icon>speaker_notes_off</mat-icon>Pasif
+      </button>
+   
+        
+        <button *ngIf="element.sayacArsivMi" mat-raised-button color="warn" (click)="sayacArsivAc(element)">
+          <mat-icon>lock</mat-icon>Arşivlendi
+        </button>
+        
+        
+        <button *ngIf="!element.sayacArsivMi" mat-raised-button color="primary" #arsivDegilse (click)="sayacArsivle(element)">
+          <mat-icon>lock_open</mat-icon>Arşivlenmedi
+        </button>
+        
+
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-th"></tr>
+    <tr mat-row class="example-detail-row" *matRowDef="let row; columns: displayedColumns"></tr>
+       
+  </table>
